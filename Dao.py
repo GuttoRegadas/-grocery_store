@@ -39,9 +39,11 @@ class DaoSale:
 
         cls.sale = list(map(lambda x: x.replace('\n', ''), cls.sale))
         cls.sale = list(map(lambda x: x.split('|'), cls.sale))
-        #print(cls.sale)
-x = Products('Banana' , '5', 'Frutas')
-y = Sale(x, 'gutto', 'josy', '3')
 
-DaoSale.save(y)
-DaoSale.read()
+        sal = []
+        for i in cls.sale:
+            sal.append(Sale(Products(i[0], i[1], i[2]), i[3], i[4], i[5]))
+        return sal
+
+x = DaoSale.read()
+print(x)
