@@ -12,14 +12,14 @@ class Products:
         self.prducts = category
 
 
-class sStock:
+class Stock:
     def __init__(self, products: Products, amount):
         self.products = products
         self.amount = amount
 
 
 class Sale:
-    def __init__(self, unit_sold: Products, seller, buyer, sold_amount, date = datetime.now()):
+    def __init__(self, unit_sold: Products, seller, buyer, sold_amount, date = datetime.now().strftime("%d/%m/%Y")):
         self.unit_sold = unit_sold
         self.seller = seller
         self.buyer = buyer
@@ -42,7 +42,6 @@ class People:
         self.cpf = cpf
         self.email = email
         self.address = address
-
 
 class Employee(People):
     def __init__(self, name, phone, cpf, email, address, clt):
