@@ -6,8 +6,8 @@ class Category:
         self.category = category
 
 class Products:
-    def __init__(self, nome, price, category):
-        self.prducts = nome
+    def __init__(self, name, price, category):
+        self.prducts = name
         self.prducts = price
         self.prducts = category
 
@@ -28,8 +28,8 @@ class Sale:
 
 
 class Provider:
-    def __init__(self, nome, cnpj, phone, category):
-        self.name = nome
+    def __init__(self, name, cnpj, phone, category):
+        self.name = name
         self.cnpj = cnpj
         self.phone = phone
         self.category = category

@@ -29,7 +29,7 @@ class ControllerCategory:
                     del x[i]
                     break
             print('Categoria removida com sucesso!')
-
+        #TODO: COLOCAR SEM CATEGORIA NO ESTOQUE
             with open('category.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.category)
@@ -46,6 +46,7 @@ class ControllerCategory:
             if len(categ01) == 0:
                 x = list(map(lambda x: Category(category_altered) if(x.category == change_category) else(x), x))
                 print("A alteração foi concluida com sucesso!")
+                # TODO: ALTERAR A CATEGORIA TAMBEM NO ESTOQUE
             else:
                 print("A categoria para qual deseja alterar já existe")
         else:
@@ -63,5 +64,22 @@ class ControllerCategory:
         else:
             for i in categorys:
                 print(f'Category: {i.category}')
-a = ControllerCategory()
-a.category_show()
+
+'''class ControllerStock:
+    def products_register(self, name, price, category, amount):
+        x = DaoStock.read()
+        y = DaoCategory.read()
+        h = list(filter(lambda x: x.category == category, y))
+        stk = list(filter(lambda  x: x.products.name == name, x))
+
+        if len(h) >0:
+            if len(stk) == 0:
+                products = Products(name, price, category)
+                DaoStock.save(products, amount)
+                print("Produto cadastrado com sucesso!")
+            else:
+                print("Produto já existe em estoque")
+        else:
+            print("Produto inexistente!")
+a = ControllerStock()
+a.products_register('banana', '5', 'Frutas', 10)'''
