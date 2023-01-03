@@ -71,12 +71,12 @@ class ControllerStock:
         x = DaoStock.read()
         y = DaoCategory.read()
         h = list(filter(lambda x: x.category == category, y))
-        stk = list(filter(lambda  x: x.product.name == name, x))
+        stk = list(filter(lambda  x: x.products.name == name, x))
 
         if len(h) > 0:
             if len(stk) == 0:
-                product = Products(name, price, category)
-                DaoStock.save(product, amount)
+                products = Products(name, price, category)
+                DaoStock.save(products, amount)
                 print("Produto cadastrado com sucesso!")
             else:
                 print("Produto já existe em estoque")
@@ -103,7 +103,7 @@ class ControllerStock:
                 arq.writelines('\n')
 
 
-    def product_change(self, change_name, name_new, prive_new, category_new, amount_new):
+    def product_change(self, change_name, name_new, price_new, category_new, amount_new):
         x = DaoStock.read()
         y = DaoCategory.read()
         h = list(filter(lambda x: x.category == category_new, y))
@@ -112,7 +112,7 @@ class ControllerStock:
             if len(stk) > 0:
                 stk = list(filter(lambda x: x.products.name == name_new, x))
                 if len(stk) == 0:
-                    x = list(map(lambda x: Stock(Products(name_new, prive_new, category_new), amount_new) if(x.products.neme == change_name) else(x), x))
+                    x = list(map(lambda x: Stock(Products(name_new, price_new, category_new), amount_new) if(x.products.name == change_name) else(x), x))
                     print("Produto alterado com sucesso!")
             else:
                 print("O produto que deseja alterar não existe!")
@@ -125,5 +125,19 @@ class ControllerStock:
 
         else:
             print("Categoria informada não existe!")
+
+
+    def stock_show(self):
+        stk = DaoStock.read()
+        if len(stk) == 0:
+            print("Estoque vazio")
+        else:
+            print("==========Produto==========")
+            for i in stk:
+                print(f"Nome: {i.products.name}\n"
+                      f"Preço: {i.products.price}\n"
+                      f"Categoria: {i.products.category}\n"
+                      f"Quantidade: {i.amount}")
+                print("----------------------------")
 a = ControllerStock()
-a.product_change('banana', 'Maca', 'Verduras', '20')
+a.stock_show()
