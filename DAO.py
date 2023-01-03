@@ -15,7 +15,6 @@ class DaoCategory:
             cls.category = arq.readlines()
 
         cls.category = list(map(lambda x: x.replace('\n', ''), cls.category))
-        print(cls.category)
 
         cat = []
         for i in cls.category:
@@ -56,16 +55,16 @@ class DaoStock:
     @classmethod
     def read(cls):
         with open('stock.txt', 'r') as arq:
-            cls.sale = arq.readlines()
+            cls.stock = arq.readlines()
 
         cls.stock = list(map(lambda x: x.replace('\n', ''), cls.stock))
         cls.stock = list(map(lambda x: x.split('|'), cls.stock))
-
         sto = []
-        for i in cls.sale:
-            sto.append(Stock(Products(i[0], i[1], i[2]), i[3]))
-        return sto
+        if len(cls.stock) > 0:
+            for i in cls.stock:
+                sto.append(Stock(Products(i[0], i[1], i[2]), i[3]))
 
+        return sto
 
 class DaoProvider:
     @classmethod

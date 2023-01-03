@@ -7,9 +7,9 @@ class Category:
 
 class Products:
     def __init__(self, name, price, category):
-        self.prducts = name
-        self.prducts = price
-        self.prducts = category
+        self.name = name
+        self.price = price
+        self.category = category
 
 
 class Stock:

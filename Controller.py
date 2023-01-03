@@ -65,21 +65,65 @@ class ControllerCategory:
             for i in categorys:
                 print(f'Category: {i.category}')
 
-'''class ControllerStock:
+
+class ControllerStock:
     def products_register(self, name, price, category, amount):
         x = DaoStock.read()
         y = DaoCategory.read()
         h = list(filter(lambda x: x.category == category, y))
-        stk = list(filter(lambda  x: x.products.name == name, x))
+        stk = list(filter(lambda  x: x.product.name == name, x))
 
-        if len(h) >0:
+        if len(h) > 0:
             if len(stk) == 0:
-                products = Products(name, price, category)
-                DaoStock.save(products, amount)
+                product = Products(name, price, category)
+                DaoStock.save(product, amount)
                 print("Produto cadastrado com sucesso!")
             else:
                 print("Produto já existe em estoque")
         else:
             print("Produto inexistente!")
+
+
+    def product_remove(self, name):
+        x = DaoStock.read()
+        stk = list(filter(lambda x: x.products.name == name, x))
+        if len(stk) > 0:
+            for i in range(len(x)):
+                if x[i].products.name == name:
+                    del x[i]
+                    break
+            print("Produto foi removio com sucesso!")
+        else:
+            print("O produto de deseja remover não existe!")
+
+        with open('stock.txt', 'w') as arq:
+            for i in x:
+                arq.writelines(i.products.name + "|" + i.products.price + "|" +
+                               i.products.category + "|" + str(i.amount))
+                arq.writelines('\n')
+
+
+    def product_change(self, change_name, name_new, prive_new, category_new, amount_new):
+        x = DaoStock.read()
+        y = DaoCategory.read()
+        h = list(filter(lambda x: x.category == category_new, y))
+        if len(h) > 0:
+            stk = list(filter(lambda x: x.products.name == change_name, x))
+            if len(stk) > 0:
+                stk = list(filter(lambda x: x.products.name == name_new, x))
+                if len(stk) == 0:
+                    x = list(map(lambda x: Stock(Products(name_new, prive_new, category_new), amount_new) if(x.products.neme == change_name) else(x), x))
+                    print("Produto alterado com sucesso!")
+            else:
+                print("O produto que deseja alterar não existe!")
+
+            with open('stock.txt', 'w') as arq:
+                for i in x:
+                    arq.writelines(i.products.name + "|" + i.products.price + "|" +
+                                   i.products.category + "|" + str(i.amount))
+                    arq.writelines('\n')
+
+        else:
+            print("Categoria informada não existe!")
 a = ControllerStock()
-a.products_register('banana', '5', 'Frutas', 10)'''
+a.product_change('banana', 'Maca', 'Verduras', '20')
