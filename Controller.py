@@ -140,6 +140,7 @@ class ControllerStock:
                       f"Quantidade: {i.amount}")
                 print("----------------------------")
 
+
 class ControllerSale:
     def sale_register(self, products_name, seller, buyer, amout_sold):
         x = DaoStock.read()
@@ -231,4 +232,30 @@ class ControllerSale:
             count += 1
 
         print(f"Toral vendido: {entire}")
+
+
+class ControllerProvider:
+    def provider_register(self, name, cnpj, phone, category):
+        x = DaoProvider.read()
+        list_cnpj = list(filter(lambda x: x.cnpj == cnpj, x))
+        list_phone = list(filter(lambda x: x.cnpj == cnpj, x))
+        if len(list_cnpj) > 0:
+            print("CNPJ já Cadastrado!")
+        elif len(list_phone) > 0:
+            print("Telefone já Cadastrado")
+        else:
+            if len(cnpj) == 14 and len(phone) <= 11 and len(phone) >= 10:
+                DaoProvider.save(Provider(name, cnpj, phone, category))
+            else:
+                print("Digite um CNPJ ou telefone válido")
+
+
+'''    def provider_change(self, change_name, mane_new, cnpj_new, phone_new, category_new):
+        x = DaoProvider.read()
+
+        stk = list(filter(lambda x: x.cnpj == cnpj_new, x))
+        if len(stk) > 0:
+            stk = stk = list(filter(lambda x: x.cnpj == cnpj_new, x))
+            if len(stk) == 0:
+                x = list(map(lambda x: Provider(mane_new, cnpj_new, phone_new, category_new) if(x.n)))'''
 
