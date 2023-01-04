@@ -139,5 +139,96 @@ class ControllerStock:
                       f"Categoria: {i.products.category}\n"
                       f"Quantidade: {i.amount}")
                 print("----------------------------")
-a = ControllerStock()
-a.stock_show()
+
+class ControllerSale:
+    def sale_register(self, products_name, seller, buyer, amout_sold):
+        x = DaoStock.read()
+        temp = []
+        exist = False
+        amount = False
+
+        for i in x:
+            if exist == False:
+                if i.products.name == products_name:
+                    exist = True
+                    if i.amount >= amout_sold:
+                        amount = True
+                        i.amount = int(i.amount) - int(amout_sold)
+
+                        sold = Sale(Products(i.products.name, i.products.price, i.products.category), seller, buyer, amout_sold)
+
+                        purchased_value = int(amout_sold) * int(i.products.price)
+
+                        DaoSale.save(sold)
+
+            temp.append([Products(i.products.name, i.products.price, i.products.category), i.amount])
+
+        arq = open('stock.txt', 'w')
+        arq.write("")
+
+        for i in temp:
+            with open('stock.txt', 'a') as arq:
+                arq.writelines(i[0].name + "|" + i[0].price + "|" + i[0].category + "|" + str(i[1]))
+                arq.writelines('\n')
+
+        if exist == False:
+            print("O produto não existe!")
+            return None
+        elif not amount:
+            print("A quantidade não contem em estoque!")
+            return None
+        else:
+            print("Venda realizada com sucesso!")
+            return purchased_value
+
+
+    def products_report(self,):
+        sale = DaoSale.read()
+        products = []
+        for i in sale:
+            name = i.unit_sold.name
+            amount = i.sold_amount
+            size = list(filter(lambda x: x['products'] == name, products))
+            if len(size) > 0:
+                products = list(map(lambda x: {'products': name, 'amount': int(x['amount']) + int(amount)}
+                if(x['products'] == name) else(x), products))
+            else:
+                products.append({'products': name, 'amount': int(amount)})
+
+        oder = sorted(products, key=lambda k: k['amount'], reverse=True)
+
+        print("Esses são os produtos mais vendidos")
+        a = 1
+        for i in oder:
+            print(f"========== Produto [{a}] ==========")
+            print(f"Produto: {i['products']} \n"
+                  f"Quantidade: {i['amount']}"
+                  )
+            a += 1
+
+    def sale_show(self,start_date, and_date):
+        sale = DaoSale.read()
+        start_date01 = datetime.strptime(start_date, '%d/%m/%Y')
+        and_date01 = datetime.strptime(and_date, '%d/%m/%Y')
+
+        select_sale = list(filter(lambda x: datetime.strptime(x.date, '%d/%m/%Y') >= start_date01
+                                  and datetime.strptime(x.date, '%d/%m/%Y') <= and_date01, sale))
+
+        count = 1
+        entire = 0
+
+        for i in select_sale:
+            print(f"========== Venda {count}==========")
+            print(f"Produto: {i.unit_sold.name}\n"
+                  f"Qauntidade: {i.sold_amount}\n"
+                  f"Categoria: {i.unit_sold.category}\n"
+                  f"Data: {i.date}\n"
+                  f"Comprador: {i.buyer}\n"
+                  f"Vendedor: {i.seller}\n"
+                  f"--------------------\n")
+
+            entire += int(i.unit_sold.price) * int(i.sold_amount)
+            count += 1
+
+        print(f"Toral vendido: {entire}")
+

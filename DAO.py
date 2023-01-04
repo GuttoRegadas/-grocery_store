@@ -62,7 +62,7 @@ class DaoStock:
         sto = []
         if len(cls.stock) > 0:
             for i in cls.stock:
-                sto.append(Stock(Products(i[0], i[1], i[2]), i[3]))
+                sto.append(Stock(Products(i[0], i[1], i[2]), int(i[3])))
 
         return sto
 
