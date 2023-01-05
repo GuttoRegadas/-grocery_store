@@ -143,6 +143,7 @@ class ControllerStock:
 
 class ControllerSale:
     def sale_register(self, products_name, seller, buyer, amout_sold):
+        global purchased_value
         x = DaoStock.read()
         temp = []
         exist = False
@@ -246,16 +247,112 @@ class ControllerProvider:
         else:
             if len(cnpj) == 14 and len(phone) <= 11 and len(phone) >= 10:
                 DaoProvider.save(Provider(name, cnpj, phone, category))
+                print("Fornecedor cadastrado com sucesso!")
             else:
                 print("Digite um CNPJ ou telefone válido")
 
 
-'''    def provider_change(self, change_name, mane_new, cnpj_new, phone_new, category_new):
+    def provider_change(self, change_name, mane_new, cnpj_new, phone_new, category_new):
         x = DaoProvider.read()
 
-        stk = list(filter(lambda x: x.cnpj == cnpj_new, x))
+        stk = list(filter(lambda x: x.name == change_name, x))
         if len(stk) > 0:
             stk = stk = list(filter(lambda x: x.cnpj == cnpj_new, x))
             if len(stk) == 0:
-                x = list(map(lambda x: Provider(mane_new, cnpj_new, phone_new, category_new) if(x.n)))'''
+                x = list(map(lambda x: Provider(mane_new, cnpj_new, phone_new, category_new) if(x.name == change_name) else(x), x))
+            else:
+                print('CNPJ já existe!')
+        else:
+            print('O fornecedor que deseja alterar não existe!')
 
+        with open('provider.txt', 'w') as arq:
+            for i in x:
+                arq.writelines(i.name + "|" + i.cnpj + "|" + i.phone + "|" + str(i.category))
+                arq.writelines(('\n'))
+            print('Fornecedor alterado com sucesso!')
+
+    def provider_remove(self, name):
+        x = DaoProvider.read()
+
+        stk = list(filter(lambda x: x.name == name, x))
+        if len(stk) > 0:
+            for i in range(len(x)):
+                if x[i].name == name:
+                    del x[i]
+                    break
+        else:
+            print("O fornecedor que deseja remover não existe!")
+            return None
+
+        with open("provider.txt", 'w') as arq:
+            for i in x:
+                arq.writelines((i.name + "|" + i.cnpj + "|" + i.phone + "|" + str(i.category)))
+                arq.writelines('\n')
+            print("Fornecedor removido com sucesso!")
+
+
+    def provider_show(self):
+        providers = DaoProvider.read()
+        if len(providers) == 0:
+            print("Lista de fornecedores está vazia!")
+
+        for i in providers:
+            print("========== Fornecedores ==========")
+            print(f"Categoria fornecida: {i.category}\n"
+                  f"Nome: {i.name}\n"
+                  f"Telefone: {i.phone}\n"
+                  f"CNPJ: {i.cnpj}")
+
+
+class ControllerCLient:
+    def client_register(self, name, phone, cpf, email, address):
+        x = DaoPeople.read()
+
+        listCpf = list(filter(lambda x: x.cpf == cpf, x))
+        if len(listCpf) > 0:
+            print('CPF já cadastrado!')
+        else:
+            if len(cpf) == 11 and len(phone) >= 10 and len(phone) <=11:
+                DaoPeople.save(People(name, phone,cpf,email, address))
+                print("Cliente cadastrado com sucesso!")
+            else:
+                print("Digite um CPF ou telefone válidos!")
+
+    def client_change(self, change_name, name_new, phone_new, cpf_new, email_new, address_new):
+        x = DaoPeople.read()
+
+        stk = list(filter(lambda x: x.name == change_name, x))
+        if len(stk) > 0:
+            x = list(map(lambda x: People(name_new, phone_new, cpf_new, email_new, address_new) if(x.name == change_name) else(x), x))
+            #print("Cliente alterado com sucesso!")
+        else:
+            print("O cliente que deseja alterar não existe!")
+
+        with open('client.txt', 'w') as arq:
+            for i in x:
+                arq.writelines(i.name + "|" + i.phone + "|" + i.cpf + "|" + i.email + "|" + i.address)
+                arq.writelines('\n')
+            print('Cliente alterado com sucesso')
+
+    def client_remove(self, name):
+        x = DaoPeople.read()
+
+        clt = list(filter(lambda x: x.name == name, x))
+        if len(clt) > 0:
+            for i in range(len(x)):
+                if x[i].name == name:
+                    del x[i]
+                    break
+        else:
+            print("Cliente que deseja remover não existe!")
+            return None
+
+        with open('client.txt', 'w') as arq:
+            for i in x:
+                arq.writelines(i.name + "|" + i.phone + "|" + i.cpf + "|" + i.email + "|" + i.address)
+                arq.writelines('\n')
+            print("Cliente removido com sucesso")
+
+
+a = ControllerCLient()
+a.client_register('josy', '08532264070', '00000000001', 'gutto@gmail.com', "Rua 1 nº 1")

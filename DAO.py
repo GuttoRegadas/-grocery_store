@@ -108,7 +108,7 @@ class DaoPeople:
 
         peop = []
         for i in cls.client:
-            peop.append(Sale(Products(i[0], i[1], i[2]), i[3], i[4]))
+            peop.append(People(i[0], i[1], i[2]), i[3], i[4])
         return peop
 
 
