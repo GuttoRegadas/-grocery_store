@@ -1,1 +1,2 @@
-
+josy|00000000001|08532264070|gutto@gmail.com|Rua 1 nº 1
+gutto|0000000002|08523264080|gutto@gmail.com|rua 1 nº 3

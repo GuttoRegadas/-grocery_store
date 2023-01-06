@@ -106,10 +106,10 @@ class DaoPeople:
         cls.client = list(map(lambda x: x.replace('\n', ''), cls.client))
         cls.client = list(map(lambda x: x.split('|'), cls.client))
 
-        peop = []
+        client = []
         for i in cls.client:
-            peop.append(People(i[0], i[1], i[2]), i[3], i[4])
-        return peop
+            client.append(People(i[0], i[1], i[2], i[3], i[4]))
+        return client
 
 
 class DaoEmployee:
@@ -124,12 +124,12 @@ class DaoEmployee:
     @classmethod
     def read(cls):
         with open('employee.txt', 'r') as arq:
-            cls.client = arq.readlines()
+            cls.employee = arq.readlines()
 
         cls.employee = list(map(lambda x: x.replace('\n', ''), cls.employee))
         cls.employee = list(map(lambda x: x.split('|'), cls.employee))
 
-        employ = []
+        employee = []
         for i in cls.employee:
-            employ.append(Sale(Products(i[0], i[1], i[2]), i[3], i[4], i[5]))
-        return employ
+            employee.append(Employee(i[0], i[1], i[2], i[3], i[4], i[5]))
+        return employee

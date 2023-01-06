@@ -324,7 +324,6 @@ class ControllerCLient:
         stk = list(filter(lambda x: x.name == change_name, x))
         if len(stk) > 0:
             x = list(map(lambda x: People(name_new, phone_new, cpf_new, email_new, address_new) if(x.name == change_name) else(x), x))
-            #print("Cliente alterado com sucesso!")
         else:
             print("O cliente que deseja alterar não existe!")
 
@@ -353,6 +352,88 @@ class ControllerCLient:
                 arq.writelines('\n')
             print("Cliente removido com sucesso")
 
+    def client_show(self):
+        clients = DaoPeople.read()
 
-a = ControllerCLient()
-a.client_register('josy', '08532264070', '00000000001', 'gutto@gmail.com', "Rua 1 nº 1")
+        if len(clients) == 0:
+            print("Lista de clientes vazia")
+
+        for i in clients:
+            print("========== Clientes ==========")
+            print(f"Nome: {i.name}\n"
+                  f"Telefone: {i.phone}\n"
+                  f"Endereço: {i.address}\n"
+                  f"Email: {i.email}\n"
+                  f"CPF: {i.cpf}")
+
+
+class ControllerEmployee:
+    def employee_register(self, clt, name, phone, cpf,email, address):
+        x = DaoEmployee.read()
+
+        listCpf = list(filter(lambda x: x.cpf == cpf, x))
+        listClt = list(filter(lambda x: x.clt == clt, x))
+        if len(listClt) > 0:
+            print("Já existe um funcionário com essa clt!")
+        else:
+            if len(cpf) == 11 and len(phone) >= 10 and len(phone) <= 11:
+                DaoEmployee.save(Employee(clt, name, phone, cpf, email, address))
+                print("Funcionário cadastrado com sucesso!")
+            else:
+                print("Digite um CPF ou Telefone Válido!")
+
+
+    def employee_change(self, change_name, clt_new, name_new, phone_new, cpf_new, email_new, address_new):
+        x = DaoEmployee.read()
+
+        stk = list(filter(lambda x: x.name == change_name, x))
+        if len(stk) > 0:
+            x = list(map(lambda x: Employee(clt_new, name_new, phone_new,cpf_new, email_new, address_new) if(x.name == change_name) else(x), x))
+        else:
+            print("O funcionárioa que deseja alterar não existe!")
+
+        with open('employee.txt', 'w') as arq:
+            for i in x:
+                arq.writelines(i.clt + "|" + i.name + "|" + i.phone + "|" + i.cpf + "|" + i.email + "|" + i.address)
+                arq.writelines('\n')
+            print("Funcionário alterado com sucesso!")
+
+
+    def employee_remove(self, name):
+        x = DaoEmployee.read()
+
+        stk = list(filter(lambda x: x.name == name, x))
+        if len(stk) > 0:
+            for i in range(len(x)):
+                if x[i].name == name:
+                    del x[i]
+                    break
+        else:
+            print("O funcionário que deseja remover não existe!")
+            return None
+
+        with open('employee.txt', 'w') as arq:
+            for i in x:
+                arq.writelines(i.name + "|" + i.phone + "|" + i.cpf + "|" + i.email + "|" + i.address + "|" + i.clt)
+                arq.writelines('\n')
+        print("Funcionário removido com secesso!")
+
+
+    def employee_show(self):
+        employees = DaoEmployee.read()
+
+        if len(employees) == 0:
+            print("Lista de funcionários vazia!")
+
+        for i in employees:
+            print("========== Funcionários ==========")
+            print(f"Nome: {i.name}\n"
+                  f"Telefone: {i.phone}\n"
+                  f"Email: {i.email}\n"
+                  f"Endereço: {i.address}\n"
+                  f"CPF: {i.cpf}\n"
+                  f"CLT: {i.clt}")
+
+
+a = ControllerEmployee()
+a.employee_change('Josy', '123456788', 'Josy Rodrigues', '08532264002', '00000000003', 'Josy@gmail.com', 'rua 20 n 1')
