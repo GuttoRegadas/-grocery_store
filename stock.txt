@@ -1,3 +1,0 @@
-Banana|5|Verduras|12
-Maca|5|Verduras|12
-Abacaxi|5|Verduras|18

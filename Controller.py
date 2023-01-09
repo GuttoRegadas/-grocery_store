@@ -29,11 +29,19 @@ class ControllerCategory:
                     del x[i]
                     break
             print('Categoria removida com sucesso!')
-        #TODO: COLOCAR SEM CATEGORIA NO ESTOQUE
             with open('category.txt', 'w') as arq:
                 for i in x:
                     arq.writelines(i.category)
                     arq.writelines('\n')
+
+        #TODO: COLOCAR SEM CATEGORIA NO ESTOQUE (já está ok!).
+        stk = DaoStock.read()
+        stk = list(map(lambda x: Stock(Products(x.products.name, x.products.price, "Sem categoria"), x.amount) if(x.products.category == remove_category) else(x), stk))
+
+        with open('stock.txt', 'w') as arq:
+            for i in stk:
+                arq.writelines(i.products.name + "|" + i.products.price + "|" +  i.products.category + "|" +  str(i.amount))
+                arq.writelines('\n')
 
 
     def category_change(self, change_category, category_altered):
@@ -47,6 +55,16 @@ class ControllerCategory:
                 x = list(map(lambda x: Category(category_altered) if(x.category == change_category) else(x), x))
                 print("A alteração foi concluida com sucesso!")
                 # TODO: ALTERAR A CATEGORIA TAMBEM NO ESTOQUE
+                stk = DaoStock.read()
+                stk = list(
+                    map(lambda x: Stock(Products(x.products.name, x.products.price, category_altered), x.amount) if (
+                                x.products.category == change_category) else (x), stk))
+
+                with open('stock.txt', 'w') as arq:
+                    for i in stk:
+                        arq.writelines(
+                            i.products.name + "|" + i.products.price + "|" + i.products.category + "|" + str(i.amount))
+                        arq.writelines('\n')
             else:
                 print("A categoria para qual deseja alterar já existe")
         else:
@@ -433,7 +451,3 @@ class ControllerEmployee:
                   f"Endereço: {i.address}\n"
                   f"CPF: {i.cpf}\n"
                   f"CLT: {i.clt}")
-
-
-a = ControllerEmployee()
-a.employee_change('Josy', '123456788', 'Josy Rodrigues', '08532264002', '00000000003', 'Josy@gmail.com', 'rua 20 n 1')
