@@ -24,10 +24,10 @@ if __name__ == "__main__":
             cat = Controller.ControllerCategory()
             while True:
                 decide = int(input("Digite 1 para cadastrar categoria\n"
-                          "Digite 2 para remover categoria\n"
-                          "Digite 3 para alterar categoria\n"
-                          "Digite 4 para mostar categorias cadastradas\n"
-                          "Digite 5 para sair\n"))
+                                  "Digite 2 para remover categoria\n"
+                                  "Digite 3 para alterar categoria\n"
+                                  "Digite 4 para mostar categorias cadastradas\n"
+                                  "Digite 5 para sair\n"))
 
                 if decide == 1:
                     category = input("Digite a categoria que deseja cadastrar\n")
@@ -69,6 +69,36 @@ if __name__ == "__main__":
                     amount = input("Digite a qunatidade\n")
                     stk.product_change(change_name, name_new, price, category, amount)
                 elif decide == 4:
-                    stk.stock_show
+                    stk.stock_show()
+                else:
+                    break
+
+        elif place == 3:
+            pvd = Controller.ControllerProvider()
+            while True:
+                decide = int(input("Digite 1 para cadastrar um fornecedor\n"
+                                    "Digite 2 para remover um fornecedor\n"
+                                    "Digite 3 para alterar um fornecedor\n"
+                                    "Digite 4 para mostar fornecedores cadastrados\n"
+                                    "Digite 5 para sair\n"))
+
+                if decide == 1:
+                    name = input("Digite o nome do fornecedor:\n")
+                    cnpj = input("Digite o CNPJ do fornecedor:\n")
+                    phone = input("Digite o telefone do fornecedor:\n")
+                    category = input("Digite a categoria de produto do fornecedor:\n")
+                    pvd.provider_register(name, cnpj, phone, category)
+                elif decide == 2:
+                    name = input("Digite o nome do fornecedor:\n")
+                    pvd.provider_remove(name)
+                elif decide == 3:
+                    change_n = input("Digite o nome do fornecedor que deseja alterar:\n")
+                    n_name = input("Digite o nome do fornecedor:\n")
+                    n_cnpj = input("Digite o CNPJ do fornecedor:\n")
+                    n_phone = input("Digite o telefone do fornecedor:\n")
+                    n_category = input("Digite a categoria de produto do fornecedor:\n")
+                    pvd.provider_change(change_n, n_name, n_cnpj, n_phone, n_category)
+                elif decide == 4:
+                    pvd.provider_show()
                 else:
                     break

@@ -275,7 +275,7 @@ class ControllerProvider:
 
         stk = list(filter(lambda x: x.name == change_name, x))
         if len(stk) > 0:
-            stk = stk = list(filter(lambda x: x.cnpj == cnpj_new, x))
+            stk = list(filter(lambda x: x.cnpj == cnpj_new, x))
             if len(stk) == 0:
                 x = list(map(lambda x: Provider(mane_new, cnpj_new, phone_new, category_new) if(x.name == change_name) else(x), x))
             else:
@@ -451,3 +451,7 @@ class ControllerEmployee:
                   f"Endereço: {i.address}\n"
                   f"CPF: {i.cpf}\n"
                   f"CLT: {i.clt}")
+
+
+#a = ControllerStock()
+#a.stock_show()

@@ -1,0 +1,4 @@
+Frutas
+Frios
+Verduras
+Carnes

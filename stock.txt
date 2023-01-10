@@ -1,0 +1,4 @@
+Banana|5|Frutas|20
+Queijo|30|Frios|20
+Tomate|10|Verduras|10
+Alcatra|40|Carnes|10
