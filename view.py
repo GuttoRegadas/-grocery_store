@@ -52,4 +52,23 @@ if __name__ == "__main__":
                                     "Digite 3 para alterar um produto\n"
                                     "Digite 4 para mostar estoque\n"
                                     "Digite 5 para sair\n"))
-
+                if decide == 1:
+                    product = input("Digite um produto que deseja cadastrar\n")
+                    price = input("Digite o preço do produto\n")
+                    category = input("Digite a categoria do produto\n")
+                    amount = input("Digite a qunatidade\n")
+                    stk.products_register(product, price, category, amount)
+                elif decide == 2:
+                    name = input("Digite um produto que deseja remover\n")
+                    stk.product_remove(name)
+                elif decide == 3:
+                    change_name = input("Digite um produto que deseja alterar\n")
+                    name_new = input("Digite o nome do produto\n")
+                    price = input("Digite o preço do produto\n")
+                    category = input("Digite a categoria do produto\n")
+                    amount = input("Digite a qunatidade\n")
+                    stk.product_change(change_name, name_new, price, category, amount)
+                elif decide == 4:
+                    stk.stock_show
+                else:
+                    break
