@@ -20,7 +20,7 @@ if __name__ == "__main__":
                           "Digite 7 para ver produtos vendidos\n"
                           "Digite 8 para sair\n"))
 
-        if place == 1:
+        if place == 1:# Acessar Categoria
             cat = Controller.ControllerCategory()
             while True:
                 decide = int(input("Digite 1 para cadastrar categoria\n"
@@ -44,7 +44,7 @@ if __name__ == "__main__":
                 else:
                     break
 
-        elif place == 2:
+        elif place == 2:# Acessar Estoque
             stk = Controller.ControllerStock()
             while True:
                 decide = int(input("Digite 1 para cadastrar um produto\n"
@@ -73,7 +73,7 @@ if __name__ == "__main__":
                 else:
                     break
 
-        elif place == 3:
+        elif place == 3:# Acessar Fornecedor
             pvd = Controller.ControllerProvider()
             while True:
                 decide = int(input("Digite 1 para cadastrar um fornecedor\n"
@@ -100,5 +100,36 @@ if __name__ == "__main__":
                     pvd.provider_change(change_n, n_name, n_cnpj, n_phone, n_category)
                 elif decide == 4:
                     pvd.provider_show()
+                else:
+                    break
+
+        elif place == 4:# Acessar Cliente
+            clt = Controller.ControllerCLient()
+            while True:
+                decide = int(input("Digite 1 para cadastrar um cliente\n"
+                                   "Digite 2 para remover um cliente\n"
+                                   "Digite 3 para alterar um cliente\n"
+                                   "Digite 4 para mostar um cliente\n"
+                                   "Digite 5 para sair\n"))
+
+                if decide == 1:
+                    name_c = input("Digite o nome do cliente:\n")
+                    phone_c = input("Digite o telefone do cliente:\n")
+                    cpf_c = input(("Digite o CPF do cliente:\n"))
+                    email_c = input("Digite o email do cliente:\n")
+                    address_c = input("Digite o endereço do cliente:\n")
+                    clt.client_register(name_c, phone_c, cpf_c, email_c, address_c)
+                elif decide == 2:
+                    name_c = input("Digite o nome do cliente para remover:\n")
+                    clt.client_remove(name_c)
+                elif decide == 3:
+                    change_n = input("Digite o cliente que deseja alterar:\n")
+                    name_c = input("Digite o nome do cliente:\n")
+                    phone_c = input("Digite o telefone:\n")
+                    email_c = input("Digite o email:\n")
+                    address_c = input("Digite o endereço:\n")
+                    clt.client_change(change_n, name_c, phone_c, cpf_c, email_c, address_c)
+                elif decide == 4:
+                    clt.client_show()
                 else:
                     break
