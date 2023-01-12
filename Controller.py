@@ -386,7 +386,7 @@ class ControllerCLient:
 
 
 class ControllerEmployee:
-    def employee_register(self, clt, name, phone, cpf,email, address):
+    def employee_register(self, name, phone, cpf, email, address, clt):
         x = DaoEmployee.read()
 
         listCpf = list(filter(lambda x: x.cpf == cpf, x))
@@ -395,24 +395,24 @@ class ControllerEmployee:
             print("Já existe um funcionário com essa clt!")
         else:
             if len(cpf) == 11 and len(phone) >= 10 and len(phone) <= 11:
-                DaoEmployee.save(Employee(clt, name, phone, cpf, email, address))
+                DaoEmployee.save(Employee(name, phone, cpf, email, address, clt))
                 print("Funcionário cadastrado com sucesso!")
             else:
                 print("Digite um CPF ou Telefone Válido!")
 
 
-    def employee_change(self, change_name, clt_new, name_new, phone_new, cpf_new, email_new, address_new):
+    def employee_change(self, change_name, name_new, phone_new, cpf_new, email_new, address_new, clt_new):
         x = DaoEmployee.read()
 
         stk = list(filter(lambda x: x.name == change_name, x))
         if len(stk) > 0:
-            x = list(map(lambda x: Employee(clt_new, name_new, phone_new,cpf_new, email_new, address_new) if(x.name == change_name) else(x), x))
+            x = list(map(lambda x: Employee(name_new, phone_new, cpf_new, email_new, address_new, clt_new) if(x.name == change_name) else(x), x))
         else:
             print("O funcionárioa que deseja alterar não existe!")
 
         with open('employee.txt', 'w') as arq:
             for i in x:
-                arq.writelines(i.clt + "|" + i.name + "|" + i.phone + "|" + i.cpf + "|" + i.email + "|" + i.address)
+                arq.writelines(i.name + "|" + i.phone + "|" + i.cpf + "|" + i.email + "|" + i.address + "|" + i.clt)
                 arq.writelines('\n')
             print("Funcionário alterado com sucesso!")
 

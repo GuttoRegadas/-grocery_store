@@ -113,7 +113,7 @@ if __name__ == "__main__":
                                    "Digite 5 para sair\n"))
 
                 if decide == 1:
-                    name_c = input("Digite o nome do cliente:\n")
+                    name_c = input("Digite o nome do cliente que deseja cadastrar:\n")
                     phone_c = input("Digite o telefone do cliente:\n")
                     cpf_c = input(("Digite o CPF do cliente:\n"))
                     email_c = input("Digite o email do cliente:\n")
@@ -131,5 +131,38 @@ if __name__ == "__main__":
                     clt.client_change(change_n, name_c, phone_c, cpf_c, email_c, address_c)
                 elif decide == 4:
                     clt.client_show()
+                else:
+                    break
+
+        elif place == 5:# Acessar Funcionarios
+            epl = Controller.ControllerEmployee()
+            while True:
+                decide = int(input("Digite 1 para o nome do funcionário que deseja cadastrar:\n"
+                                   "Digite 2 para remover cadastro de funcionário:\n"
+                                   "Digite 3 para alterar cadastro de funcinário:\n"
+                                   "Digite 4 para mostrar cadastros de funcionários:\n"
+                                   "Digite 5 para voltar:\n"))
+                if decide == 1:
+                    name_epl =  input("Digite o nome do Fincionário:\n")
+                    phone_epl = input("Digite o telefone:\n")
+                    cpf_epl = input("Digite o CPF:\n")
+                    email_epl = input("Digite o email do funcionário:\n")
+                    address_epl = input("Digite o endereço do Funcinário:\n")
+                    clt_epl = input("Digite a CLT do funcionárioa para cadastro:\n")
+                    epl.employee_register(name_epl, phone_epl, cpf_epl, email_epl, address_epl, clt_epl)
+                elif decide == 2:
+                    name_epl = input("Digite o nome do funcinário que deseja remover do cadastro:\n")
+                    epl.employee_remove(name_epl)
+                elif decide == 3:
+                    change_n = input("Digite o nome do Funcionário para alteração:\n")
+                    name_epl = input("Digite o nome do Fincionário:\n")
+                    phone_epl = input("Digite o telefone:\n")
+                    cpf_epl = input("Digite o CPF:\n")
+                    email_epl = input("Digite o email do funcionário:\n")
+                    address_epl = input("Digite o endereço do Funcinário:\n")
+                    clt_epl = input("Digite a CLT do funcionárioa para cadastro:\n")
+                    epl.employee_change(change_n, name_epl, phone_epl, cpf_epl, email_epl, address_epl, clt_epl)
+                elif decide == 4:
+                    epl.employee_show()
                 else:
                     break

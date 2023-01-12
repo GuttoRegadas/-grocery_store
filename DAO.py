@@ -116,8 +116,9 @@ class DaoEmployee:
     @classmethod
     def save(cls, employee: Employee):
         with open('employee.txt', 'a') as arq:
-            arq.writelines(employee.clt + "|" + employee.name + "|" + employee.phone + "|" +
-                            employee.cpf + "|" + employee.email + "|" + employee.address)
+            arq.writelines(employee.name + "|" + employee.phone + "|" +
+                           employee.cpf + "|" + employee.email + "|" +
+                           employee.address + "|" + employee.clt)
             arq.writelines('\n')
 
 
