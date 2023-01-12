@@ -27,7 +27,14 @@ class DaoSale:
     @classmethod
     def save(cls, sale: Sale):
         with open('sale.txt', 'a') as arp:
-            arp.writelines(sale.unit_sold.name + '|' + sale.unit_sold.price + '|' + sale.unit_sold.category + '|' + sale.seller + '|' + sale.buyer + '|' + str(sale.sold_amount) + '|' + sale.date)
+            arp.writelines(
+                      sale.unit_sold.name +
+                '|' + sale.unit_sold.price +
+                '|' + sale.unit_sold.category +
+                '|' + sale.seller +
+                '|' + sale.buyer +
+                '|' + int(sale.sold_amount) +
+                '|' + sale.date)
             arp.writelines('\n')
 
     @classmethod
@@ -48,7 +55,7 @@ class DaoStock:
     def save(cls, products: Products, amount):
         with open('stock.txt', 'a') as arq:
             arq.writelines(products.name + "|" + products.price + "|" +
-                            products.category + "|" + str(amount))
+                            products.category + "|" + int(amount))
             arq.writelines('\n')
 
 

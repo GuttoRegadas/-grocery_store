@@ -16,7 +16,7 @@ if __name__ == "__main__":
                           "Digite 3 para acessar ( Fornecedor )\n"
                           "Digite 4 para acessar ( cliente )\n"
                           "Digite 5 para acessar ( Funinario )\n"
-                          "Digite 6 para acessar ( Categoria )\n"
+                          "Digite 6 para acessar ( Vendas )\n"
                           "Digite 7 para ver produtos vendidos\n"
                           "Digite 8 para sair\n"))
 
@@ -166,3 +166,16 @@ if __name__ == "__main__":
                     epl.employee_show()
                 else:
                     break
+
+'''        elif place == 6:
+            sale = Controller.ControllerSale()
+            while True:
+                decide = int(input("Digite 1 para realizar uma Venda\n"
+                                    "Digite 4 para mostar mostar relatório de vendas\n"
+                                    "Digite 5 para sair\n"))
+                if decide == 1:
+                    protuct = input("Digite o produto para venda:\n")
+                    saller = input("Digite o vendedor:\n")
+                    buyer = input("Digite o Cliente:\n")
+                    amount = input("Digite a quantidade:\n")
+                    sale.sale_register(protuct, saller, buyer, amount)'''
