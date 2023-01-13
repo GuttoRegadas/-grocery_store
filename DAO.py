@@ -33,7 +33,7 @@ class DaoSale:
                 '|' + sale.unit_sold.category +
                 '|' + sale.seller +
                 '|' + sale.buyer +
-                '|' + int(sale.sold_amount) +
+                '|' + sale.sold_amount +
                 '|' + sale.date)
             arp.writelines('\n')
 

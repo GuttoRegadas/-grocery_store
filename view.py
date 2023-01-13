@@ -41,8 +41,10 @@ if __name__ == "__main__":
                     cat.category_change(category, category_new)
                 elif decide == 4:
                     cat.category_show()
-                else:
+                elif decide == 5:
                     break
+                else:
+                    print("Digite um comando válido!")
 
         elif place == 2:# Acessar Estoque
             stk = Controller.ControllerStock()
@@ -70,8 +72,10 @@ if __name__ == "__main__":
                     stk.product_change(change_name, name_new, price, category, amount)
                 elif decide == 4:
                     stk.stock_show()
-                else:
+                elif decide == 5:
                     break
+                else:
+                    print("Digite um comando válido!")
 
         elif place == 3:# Acessar Fornecedor
             pvd = Controller.ControllerProvider()
@@ -100,8 +104,10 @@ if __name__ == "__main__":
                     pvd.provider_change(change_n, n_name, n_cnpj, n_phone, n_category)
                 elif decide == 4:
                     pvd.provider_show()
-                else:
+                elif decide == 5:
                     break
+                else:
+                    print("Digite um comando válido!")
 
         elif place == 4:# Acessar Cliente
             clt = Controller.ControllerCLient()
@@ -131,8 +137,10 @@ if __name__ == "__main__":
                     clt.client_change(change_n, name_c, phone_c, cpf_c, email_c, address_c)
                 elif decide == 4:
                     clt.client_show()
-                else:
+                elif decide == 5:
                     break
+                else:
+                    print("Digite um comando válido!")
 
         elif place == 5:# Acessar Funcionarios
             epl = Controller.ControllerEmployee()
@@ -164,18 +172,37 @@ if __name__ == "__main__":
                     epl.employee_change(change_n, name_epl, phone_epl, cpf_epl, email_epl, address_epl, clt_epl)
                 elif decide == 4:
                     epl.employee_show()
-                else:
+                elif decide == 5:
                     break
+                else:
+                    print("Digite um comando válido!")
 
-'''        elif place == 6:
+        elif place == 6:
             sale = Controller.ControllerSale()
             while True:
                 decide = int(input("Digite 1 para realizar uma Venda\n"
-                                    "Digite 4 para mostar mostar relatório de vendas\n"
+                                    "Digite 2 para mostar mostar vendas\n"
                                     "Digite 5 para sair\n"))
                 if decide == 1:
                     protuct = input("Digite o produto para venda:\n")
                     saller = input("Digite o vendedor:\n")
                     buyer = input("Digite o Cliente:\n")
                     amount = input("Digite a quantidade:\n")
-                    sale.sale_register(protuct, saller, buyer, amount)'''
+                    sale.sale_register(protuct, saller, buyer, amount)
+                elif decide == 2:
+                    start_date = input("Data inicial:\n")
+                    end_date = input("data final:\n")
+                    sale.sale_show(start_date, end_date)
+                elif decide == 5:
+                    break
+                else:
+                    print("Digite um comando válido!")
+        elif place == 7:
+            sale = Controller.ControllerSale()
+            sale.products_report()
+
+        elif place == 8:
+            break
+
+        else:
+            print("Digite um comando válido!\n")
